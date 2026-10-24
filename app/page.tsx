@@ -33,10 +33,15 @@ export default function Home() {
       return;
     }
 
-    if (password.length <= 6) {
-      setError("Password must be more than 6 characters.");
-      return;
-    }
+    if (password.length < 8) {
+  setError("Password must be at least 8 characters long.");
+  return;
+}
+
+    if (password.length > 16) {
+  setError("Password cannot be more than 16 characters.");
+  return;
+}
 
     sessionStorage.setItem("loggedIn", "true");
     sessionStorage.setItem("userEmail", email.trim());
@@ -73,13 +78,14 @@ export default function Home() {
 
           <div className="password-wrapper">
             <input
-              aria-label="Password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-            />
+            aria-label="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
+            maxLength={17}
+/>
 
             <button
             className="password-toggle"
